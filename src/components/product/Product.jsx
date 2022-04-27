@@ -25,6 +25,7 @@ const Container = styled.div`
   width: 23%;
   background-color: #f5fbfd;
   margin: 10px;
+  gap: 2%
   padding: 20px;
   position: relative;
   border-radius: 5px;
