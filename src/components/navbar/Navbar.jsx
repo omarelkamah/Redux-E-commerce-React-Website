@@ -1,7 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useRef } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-// import Badge from '@mui/material/Badge';
 import Badge from '@material-ui/core/Badge'
 import { mobile } from '../../responsive'
 import { useSelector } from 'react-redux'
@@ -25,7 +24,7 @@ const Left = styled.div`
   align-items: center;
 `
 
-const SearchContainer = styled.div`
+const SearchContainer = styled.form`
   flex: 1;
   display: flex;
   align-items: center;
@@ -89,14 +88,29 @@ function Navbar (props) {
   const { items } = useSelector(state => state.cart)
   const { wishList } = useSelector(state => state.wish)
 
+  const inputSearch = useRef()
+  const navigate = useNavigate()
+
+  const handelSearch = e => {
+    const inputValue = inputSearch.current.value.toLowerCase()
+    inputSearch.current.value = ''
+    navigate(`/search/${inputValue}`)
+  }
+
   return (
     <Container>
       <Wrapper>
         <Left>
-          <SearchContainer>
-            <Input placeholder='Search' />
+          <SearchContainer
+            onSubmit={e => {
+              e.preventDefault()
+              return handelSearch()
+            }}
+          >
+            <Input placeholder='Search' ref={inputSearch} />
             <i
               className='fas fa-search'
+              onClick={() => handelSearch()}
               style={{ color: 'gray', fontSize: 16, marginRight: 10 }}
             ></i>
           </SearchContainer>

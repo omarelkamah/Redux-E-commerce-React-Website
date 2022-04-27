@@ -10,6 +10,7 @@ import Toper from './components/toper/Toper'
 import Navbar from './components/navbar/Navbar'
 import CheckOut from './pages/checkOut/CheckOut'
 import WishList from './pages/wishList/WishList'
+import SearchPage from './pages/searchPage/SearchPage'
 
 function App () {
   const [user, setUser] = useState(false)
@@ -30,6 +31,7 @@ function App () {
         <Route path='/cart' element={<Cart />} />
         <Route path='/checkout' element={<CheckOut />} />
         <Route path='/wishlist' element={<WishList />} />
+        <Route path='/search/:productName' element={<SearchPage />} />
       </Routes>
     </BrowserRouter>
   )
