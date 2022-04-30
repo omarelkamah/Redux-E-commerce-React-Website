@@ -15,16 +15,16 @@ export const getProducts = createAsyncThunk(
 
 const productSlice = createSlice({
   name: "products",
-  initialState: { products: null },
+  initialState: { products: [] },
   extraReducers: {
     [getProducts.pending]: (state, action) => {
-      console.log(action, "hh");
+      //   console.log(action, "hh");
     },
     [getProducts.fulfilled]: (state, action) => {
-      console.log(action);
+      state.products = action.payload;
     },
     [getProducts.rejected]: (state, action) => {
-      console.log(action);
+      //   console.log(action);
     },
   },
 });

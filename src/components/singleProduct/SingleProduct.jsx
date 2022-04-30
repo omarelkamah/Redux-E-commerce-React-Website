@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { mobile } from '../../responsive'
 import { allProducts } from '../../Data'
@@ -51,46 +51,14 @@ const Price = styled.span`
   display: block;
   margin-top: 25px;
 `
-
-const FilterContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 50%;
-  align-items: center;
-  margin-top: 25px;
-`
-
-const Filter = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const FilterTitle = styled.h3`
-  margin-right: 10px;
-  font-weight: 300;
-  font-size: 20px;
-`
-
-const FilterColor = styled.div`
-  width: 25px;
-  height: 25px;
-  background: ${props => props.color};
-  border-radius: 50%;
-  margin-right: 10px;
-  cursor: pointer;
-
-  ${mobile({ width: '20px', height: '20px', marginRight: '5px' })};
-`
-
-const SelectSizes = styled.select`
-  padding: 5px 8px;
+const Category = styled.div`
+  width: fit-content;
+  padding: 5px 10px;
+  background: #008080;
+  color: white;
   border-radius: 5px;
-  outline: none;
-  cursor: pointer;
+  font-size: 14px;
 `
-
-const OptionSizes = styled.option``
 
 const AddContainer = styled.div`
   display: flex;
@@ -134,65 +102,52 @@ const Button = styled.button`
 export default function SingleProduct ({ productId }) {
   const { items } = useSelector(state => state.cart)
   const dispatch = useDispatch()
+  const [product, setProduct] = useState({})
+
+  useEffect(() => {
+    const fetchSingleData = async () => {
+      const res = await fetch(`https://fakestoreapi.com/products/${productId}`)
+      const singleProduct = await res.json()
+      setProduct(singleProduct)
+      return singleProduct
+    }
+    fetchSingleData()
+  }, [productId])
 
   return (
-    <>
-      {allProducts.map(product => (
-        <Container key={product.id}>
-          {product.id == productId ? (
-            <Wrapper>
-              <ImgContainer>
-                <Img src={product.img} />
-              </ImgContainer>
-              <InfoContainer>
-                <Title>{product.title}</Title>
-                <Desc>{product.desc}</Desc>
-                <Price>$ {product.price}</Price>
-                <FilterContainer>
-                  <Filter>
-                    <FilterTitle>Color</FilterTitle>
-                    {product.color.map(productColor => (
-                      <FilterColor key={Math.random()} color={productColor} />
-                    ))}
-                  </Filter>
-                  <Filter>
-                    <FilterTitle>Size</FilterTitle>
-                    <SelectSizes>
-                      {product.size.map(productSize => (
-                        <OptionSizes key={Math.random()}>
-                          {productSize}
-                        </OptionSizes>
-                      ))}
-                    </SelectSizes>
-                  </Filter>
-                </FilterContainer>
-                <AddContainer>
-                  <AmountContainer>
-                    <i
-                      className='fas fa-minus'
-                      onClick={() => dispatch(removeFromCart(product))}
-                    ></i>
-                    <Amount>
-                      {items.length !== 0
-                        ? items.map(item => (
-                            <>{productId == item.id && item.qty}</>
-                          ))
-                        : '0'}
-                    </Amount>
-                    <i
-                      className='fas fa-plus'
-                      onClick={() => dispatch(addToCart(product))}
-                    ></i>
-                  </AmountContainer>
-                  <Button onClick={() => dispatch(addToCart(product))}>
-                    ADD TO CART
-                  </Button>
-                </AddContainer>
-              </InfoContainer>
-            </Wrapper>
-          ) : null}
-        </Container>
-      ))}
-    </>
+    <Container>
+      <Wrapper>
+        <ImgContainer>
+          <Img src={product.image} />
+        </ImgContainer>
+        <InfoContainer>
+          <Category>{product.category}</Category>
+          <Title>{product.title}</Title>
+          <Desc>{product.description}</Desc>
+          <Price>$ {product.price}</Price>
+
+          <AddContainer>
+            <AmountContainer>
+              <i
+                className='fas fa-minus'
+                onClick={() => dispatch(removeFromCart(product))}
+              ></i>
+              <Amount>
+                {items.length !== 0
+                  ? items.map(item => <>{productId == item.id && item.qty}</>)
+                  : '0'}
+              </Amount>
+              <i
+                className='fas fa-plus'
+                onClick={() => dispatch(addToCart(product))}
+              ></i>
+            </AmountContainer>
+            <Button onClick={() => dispatch(addToCart(product))}>
+              ADD TO CART
+            </Button>
+          </AddContainer>
+        </InfoContainer>
+      </Wrapper>
+    </Container>
   )
 }

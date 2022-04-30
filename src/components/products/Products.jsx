@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import { allProducts } from '../../Data'
 import Product from '../product/Product'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getProducts } from '../../redux/reducers/productSlice'
 
@@ -16,14 +15,16 @@ const Container = styled.div`
 
 export default function Products () {
   const dispatch = useDispatch()
+  const { products } = useSelector(state => state.products)
   useEffect(() => {
     dispatch(getProducts())
   }, [dispatch])
 
+  console.log(products)
   return (
     <Container>
-      {allProducts.map(item => (
-        <Product item={item} key={item.id} />
+      {products.map(product => (
+        <Product product={product} key={product.id} />
       ))}
     </Container>
   )

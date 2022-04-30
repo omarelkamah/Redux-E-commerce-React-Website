@@ -83,20 +83,20 @@ const Icon = styled.div`
 `
 
 export default function Product (props) {
-  const { item } = props
+  const { product } = props
   const dispatch = useDispatch()
 
   return (
     <Container>
-      <Link to={`/productlist/${item.id}`} style={{}}>
+      <Link to={`/productlist/${product.id}`} style={{}}>
         <ImgContainer>
-          <Img src={item.img} />
+          <Img src={product.image} />
         </ImgContainer>
         <InfoContainer>
           <Icon>
             <i
               className='fas fa-shopping-cart'
-              onClick={() => dispatch(addToCart(item))}
+              onClick={() => dispatch(addToCart(product))}
             ></i>
           </Icon>
           <Icon>
@@ -105,7 +105,7 @@ export default function Product (props) {
           <Icon>
             <i
               className='fas fa-heart'
-              onClick={() => dispatch(addToWishList(item))}
+              onClick={() => dispatch(addToWishList(product))}
             ></i>
           </Icon>
         </InfoContainer>
