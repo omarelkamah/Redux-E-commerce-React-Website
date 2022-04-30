@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 import { allProducts } from '../../Data'
 import Product from '../product/Product'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { getProducts } from '../../redux/reducers/productSlice'
 
 const Container = styled.div`
   display: flex;
@@ -12,6 +15,11 @@ const Container = styled.div`
 `
 
 export default function Products () {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getProducts())
+  }, [dispatch])
+
   return (
     <Container>
       {allProducts.map(item => (
