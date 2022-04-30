@@ -109,15 +109,7 @@ const ProductId = styled.span`
   margin-bottom: 15px;
 `
 
-const ProductColor = styled.span`
-  margin-bottom: 15px;
-  width: 30px;
-  height: 30px;
-  background: ${props => props.color};
-  border-radius: 50%;
-`
-
-const ProductSize = styled.span``
+// const ProductSize = styled.span``
 
 const PriceDetail = styled.div`
   display: flex;
@@ -232,7 +224,7 @@ export default function Cart (props) {
               <>
                 <Product>
                   <ProductDetail>
-                    <Image src={item.img} alt={item.title} />
+                    <Image src={item.image} alt={item.title} />
                     <Details>
                       <ProductName>
                         <b>Product:</b> {item.title}
@@ -240,10 +232,10 @@ export default function Cart (props) {
                       <ProductId>
                         <b>ID:</b> {item.id}
                       </ProductId>
-                      <ProductColor color='black' />
-                      <ProductSize>
+                      {/* <ProductColor color='black' /> */}
+                      {/* <ProductSize>
                         <b>Size:</b> 37.5
-                      </ProductSize>
+                      </ProductSize> */}
                     </Details>
                   </ProductDetail>
                   <PriceDetail>
@@ -281,7 +273,7 @@ export default function Cart (props) {
             </SummaryItem>
             <SummaryItem type='total'>
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ {getItemsPrice}</SummaryItemPrice>
+              <SummaryItemPrice>$ {getItemsPrice.toFixed(3)}</SummaryItemPrice>
             </SummaryItem>
             <Link to='/checkout'>
               <Button>CHECK OUT</Button>

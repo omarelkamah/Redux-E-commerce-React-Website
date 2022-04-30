@@ -84,7 +84,7 @@ const WishList = () => {
         <>
           <Product>
             <ProductDetail>
-              <Image src={item.img} alt={item.title} />
+              <Image src={item.image} alt={item.title} />
               <Details>
                 <ProductName>
                   <b>Product:</b> {item.title}

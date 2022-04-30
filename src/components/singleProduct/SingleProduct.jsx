@@ -58,6 +58,7 @@ const Category = styled.div`
   color: white;
   border-radius: 5px;
   font-size: 14px;
+  margin-bottom: 15px;
 `
 
 const AddContainer = styled.div`
