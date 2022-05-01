@@ -34,7 +34,7 @@ const Container = styled.div`
   justify-content: center;
   height: 300px;
 
-  ${mobile({ width: '100%' })};
+  ${mobile({ width: '100%', margin: 0, marginBottom: '20px' })};
 
   &:hover ${InfoContainer} {
     opacity: 1;

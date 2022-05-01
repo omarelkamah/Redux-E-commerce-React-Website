@@ -1,8 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import Product from '../../components/product/Product'
-import { allProducts } from '../../Data'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 
 const SearchedPage = styled.div`
   min-height: 80vh;
@@ -27,9 +27,10 @@ const EmptyResult = styled.div`
 `
 
 const SearchPage = () => {
+  const { products } = useSelector(state => state.products)
   const productTitle = useParams()
   const product = productTitle.productName
-  const searchedProducts = allProducts.filter(onlyProduct => {
+  const searchedProducts = products.filter(onlyProduct => {
     return onlyProduct.title.toLowerCase().includes(product)
   })
 
@@ -39,7 +40,7 @@ const SearchPage = () => {
         <EmptyResult>Your Searched Not Mathced...!</EmptyResult>
       )}
       {searchedProducts.map(item => (
-        <Product item={item} key={item.id} />
+        <Product product={item} key={item.id} />
       ))}
     </SearchedPage>
   )

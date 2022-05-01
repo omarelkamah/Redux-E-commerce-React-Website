@@ -11,6 +11,7 @@ import Navbar from './components/navbar/Navbar'
 import CheckOut from './pages/checkOut/CheckOut'
 import WishList from './pages/wishList/WishList'
 import SearchPage from './pages/searchPage/SearchPage'
+import CategoryPage from './pages/categoryPage/CategoryPage'
 
 function App () {
   const [user, setUser] = useState(false)
@@ -32,6 +33,7 @@ function App () {
         <Route path='/checkout' element={<CheckOut />} />
         <Route path='/wishlist' element={<WishList />} />
         <Route path='/search/:productName' element={<SearchPage />} />
+        <Route path='/category/:categoryName' element={<CategoryPage />} />
       </Routes>
     </BrowserRouter>
   )

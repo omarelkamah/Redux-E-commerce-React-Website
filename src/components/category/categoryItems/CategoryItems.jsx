@@ -54,7 +54,7 @@ export default function CategoryItems ({ item }) {
       </ImgContainer>
       <InfoContainer>
         <Title>{item.title}</Title>
-        <Link to='/productlist'>
+        <Link to={`/category/${item.link}`}>
           <Button>SHOP NOW</Button>
         </Link>
       </InfoContainer>

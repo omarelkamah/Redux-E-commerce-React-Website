@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { mobile } from '../../responsive'
-import { allProducts } from '../../Data'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart, removeFromCart } from '../../redux/reducers/cartItem'
+import { Link } from 'react-router-dom'
 
 const Container = styled.div``
 
@@ -59,6 +59,7 @@ const Category = styled.div`
   border-radius: 5px;
   font-size: 14px;
   margin-bottom: 15px;
+  cursor: pointer;
 `
 
 const AddContainer = styled.div`
@@ -122,7 +123,10 @@ export default function SingleProduct ({ productId }) {
           <Img src={product.image} />
         </ImgContainer>
         <InfoContainer>
-          <Category>{product.category}</Category>
+          <Link to={`/category/${product.category}`}>
+            <Category>{product.category}</Category>
+          </Link>
+
           <Title>{product.title}</Title>
           <Desc>{product.description}</Desc>
           <Price>$ {product.price}</Price>
